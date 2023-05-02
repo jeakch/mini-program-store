@@ -1,34 +1,20 @@
 <template>
   <view class="goodList">
-    <view class="item">
-      <image
-        class="img"
-        src="http://yanxuan.nosdn.127.net/72dfb4bfc1cd1b834c064a9d1d40627d.png"
-        mode="widthFix"
-      ></image>
+    <view class="item" v-for="item in list" :key="item.id">
+      <image class="img" :src="item.list_pic_url" mode="widthFix"></image>
+      <!-- <block v-if="item.goods_number <= 0">
+        <view class="sold-img">
+          <image
+            class="soldout"
+            mode="widthFix"
+            src="/static/images/icon/sold-out.png"
+          ></image>
+        </view>
+      </block> -->
       <view class="text">
-        <view class="tit">这是一个标题</view>
-        <view class="desc">这是一个描述</view>
-        <view class="price">￥200.00</view>
-      </view>
-    </view>
-    <view class="item">
-      <image
-        class="img"
-        src="http://yanxuan.nosdn.127.net/72dfb4bfc1cd1b834c064a9d1d40627d.png"
-        mode="widthFix"
-      ></image>
-      <!--
-			<block>
-                <view class='sold-img'>
-                	<image class='soldout' mode="widthFix" src='/static/images/icon/sold-out.png'></image>
-                </view>
-			</block>
-			-->
-      <view class="text">
-        <view class="tit">这是一个标题</view>
-        <view class="desc">这是一个描述</view>
-        <view class="price">￥200.00</view>
+        <view class="tit">{{ item.name }}</view>
+        <view class="desc">{{ item.goods_brief }}</view>
+        <view class="price">￥{{ item.min_retail_price }}</view>
       </view>
     </view>
   </view>
@@ -105,7 +91,7 @@ export default {
       overflow: hidden;
     }
     .price {
-      color: #409eff;
+      color: #f2272d;
       font-size: 32rpx;
       background-color: #fff;
       line-height: 40rpx;

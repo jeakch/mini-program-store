@@ -70,10 +70,21 @@ uni.$u.http.interceptors.request.use(
 // )
 
 // 响应拦截
+// todo: 对数据解构处理一下，集中能处理错误，和返回解构数据
 uni.$u.http.interceptors.response.use(
   response => {
-    const data = response.data // 解构出来数据
-    return data
+    const { errno, errmsg, data } = response.data
+    if (errno === 0) {
+      // 业务正确
+      return data
+    } else {
+      // 业务错误
+      uni.showToast({
+        icon: 'none',
+        title: errmsg
+      })
+      return Promise.reject(errmsg)
+    }
   },
   response => {
     return Promise.reject(response)
