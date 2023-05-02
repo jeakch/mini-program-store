@@ -7,6 +7,11 @@ import Vue from 'vue'
 import uView from '@/uni_modules/uview-ui'
 Vue.use(uView)
 
+// 导入请求实例
+import '@/utils/request.js'
+uni.$http = uni.$u.http
+// 页面中通过  uni.$http 来实现请求
+
 Vue.config.productionTip = false
 App.mpType = 'app'
 
