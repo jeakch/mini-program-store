@@ -1,32 +1,116 @@
 {
-	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
-		{
-			"path": "pages/index/index",
-			"style": {
-				"navigationBarTitleText": "uni-app"
-			}
-		}
-	],
-	"globalStyle": {
-		"navigationBarTextStyle": "black",
-		"navigationBarTitleText": "uni-app",
-		"navigationBarBackgroundColor": "#F8F8F8",
-		"backgroundColor": "#F8F8F8"
-	},
-	"uniIdRouter": {},
-	// 配置subPackages字段，分包
-	"subPackages": [
+  "pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
     {
-        "pages": [],
-        "root": "pkgGood"
-    },
-    {
-        "pages": [],
-        "root": "pkgUser"
-    },
-    {
-        "pages": [],
-        "root": "pkgOrder"
+      "path": "pages/index/index",
+      "style": {
+        // "navigationBarTitleText": "uni-app"
+      }
+    }, {
+      "path": "pages/cate/cate",
+      "style": {
+        "navigationBarTitleText": "分类页",
+        "enablePullDownRefresh": false
+      }
+
+    }, {
+      "path": "pages/cart/cart",
+      "style": {
+        "navigationBarTitleText": "购物车",
+        "enablePullDownRefresh": false
+      }
+
+    }, {
+      "path": "pages/my/my",
+      "style": {
+        "navigationBarTitleText": "我的",
+        "enablePullDownRefresh": false,
+        "navigationStyle": "custom" // 加上这一句，就没有默认头部，可以自定义
+      }
+
     }
-]
+  ],
+  "globalStyle": {
+    "navigationBarTextStyle": "white",
+    "navigationBarTitleText": "爱购商城",
+    "navigationBarBackgroundColor": "#409eff",
+    "backgroundColor": "#F8F8F8"
+  },
+  "uniIdRouter": {},
+  // 配置subPackages字段，分包
+  "subPackages": [{
+      "pages": [{
+        "path": "detail/detail",
+        "style": {
+          "navigationBarTitleText": "商品详情",
+          "enablePullDownRefresh": false
+        }
+
+      }, {
+        "path": "search/search",
+        "style": {
+          "navigationBarTitleText": "搜索",
+          "enablePullDownRefresh": false
+        }
+
+      }],
+      "root": "pkgGood"
+    },
+    {
+      "pages": [{
+        "path": "setting/setting",
+        "style": {
+          "navigationBarTitleText": "设置用户资料",
+          "enablePullDownRefresh": false
+        }
+
+      }, {
+        "path": "addressList/addressList",
+        "style": {
+          "navigationBarTitleText": "用户地址",
+          "enablePullDownRefresh": false
+        }
+
+      }, {
+        "path": "addressInfo/addressInfo",
+        "style": {
+          "navigationBarTitleText": "用户信息",
+          "enablePullDownRefresh": false
+        }
+
+      }, {
+        "path": "foot/foot",
+        "style": {
+          "navigationBarTitleText": "用户足迹",
+          "enablePullDownRefresh": false
+        }
+
+      }, {
+        "path": "about/about",
+        "style": {
+          "navigationBarTitleText": "关于我们",
+          "enablePullDownRefresh": false
+        }
+
+      }],
+      "root": "pkgUser"
+    },
+    {
+      "pages": [{
+        "path": "checkout/checkout",
+        "style": {
+          "navigationBarTitleText": "确认订单",
+          "enablePullDownRefresh": false
+        }
+
+      }, {
+        "path": "orderList/orderList",
+        "style": {
+          "navigationBarTitleText": "我的订单",
+          "enablePullDownRefresh": false
+        }
+
+      }],
+      "root": "pkgOrder"
+    }
+  ]
 }
