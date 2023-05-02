@@ -1,5 +1,8 @@
 <template>
-  <view>首页</view>
+  <view
+    >首页
+    <u-button type="primary" plain text="确定"></u-button>
+  </view>
 </template>
 <script>
 export default {
