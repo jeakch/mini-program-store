@@ -12,6 +12,9 @@ import '@/utils/request.js'
 uni.$http = uni.$u.http
 // 页面中通过  uni.$http 来实现请求
 
+// 导入仓库实例
+import store from '@/store/index.js'
+
 Vue.config.productionTip = false
 App.mpType = 'app'
 
@@ -44,7 +47,8 @@ try {
 } catch (error) {}
 
 const app = new Vue({
-  ...App
+  ...App,
+  store
 })
 app.$mount()
 // #endif
