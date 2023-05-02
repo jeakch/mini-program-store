@@ -32,8 +32,8 @@
   "globalStyle": {
     "navigationBarTextStyle": "white",
     "navigationBarTitleText": "爱购商城",
-    "navigationBarBackgroundColor": "#409eff",
-    "backgroundColor": "#F8F8F8"
+    "navigationBarBackgroundColor": "#ff2d4a",
+    "backgroundColor": "#fcfcfc"
   },
   "uniIdRouter": {},
   // 配置subPackages字段，分包
@@ -112,5 +112,38 @@
       }],
       "root": "pkgOrder"
     }
-  ]
+  ],
+  "tabBar": {
+    "backgroundColor": "#fcfcfc",
+    "borderStyle": "black",
+    "color": "#aaaaaa",
+    "selectedColor": "#ff2d4a",
+    "list": [
+        {
+            "pagePath": "pages/index/index",
+            "text": "首页",
+            "iconPath": "static/images/home.png",
+            "selectedIconPath": "static/images/home-o.png"
+        },
+        {
+            "pagePath": "pages/cate/cate",
+            "text": "分类",
+            "iconPath": "static/images/category.png",
+            "selectedIconPath": "static/images/category-o.png"
+        },
+        {
+            "pagePath": "pages/cart/cart",
+            "text": "购物车",
+            "iconPath": "static/images/cart.png",
+            "selectedIconPath": "static/images/cart-o.png"
+        },
+        {
+            "pagePath": "pages/my/my",
+            "text": "我的",
+            "iconPath": "static/images/my.png",
+            "selectedIconPath": "static/images/my-o.png"
+        }
+    ]
+}
+
 }
