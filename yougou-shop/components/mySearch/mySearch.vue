@@ -62,8 +62,21 @@ export default {
 export default {
   data () {
     return {
+      goodsCount: '',
       keyword: ''
     }
+  },
+  methods: {
+    // 2. 获取数据请求
+    async getCountData () {
+      let res = await uni.$http.get('/goods/count')
+      this.goodsCount = res.goodsCount
+      this.keyword = '搜索,共' + this.goodsCount + '款好物'
+    }
+  },
+  created () {
+    // 3. 组件里面，在created里面调用请求方法
+    this.getCountData()
   }
 }
 </script>

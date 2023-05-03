@@ -94,12 +94,22 @@ export default {
       banner: [], //轮播图
       categoryList: [], //分类  categorise：分类
       channel: [], //单词是频道的意思，这里是菜单区域，中间的5宫格对应5个频道
-      notice: ''
+      notice: '',
+
+      // 控制搜索组件显示
+      searchShow: false
     }
   },
   onLoad () {},
   onShow () {
     this.getIndexData()
+
+    // 搜索组件被创建了
+    this.searchShow = true
+  },
+  onHide () {
+    // 搜索组件关闭了
+    this.searchShow = false
   },
 
   // methods定义获取数据方法
