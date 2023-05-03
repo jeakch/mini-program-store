@@ -15,7 +15,9 @@
       indicator-active-color="#fa805c"
     >
       <swiper-item v-for="item in banner" :key="item.id">
-        <image class="img" mode="widthFix" :src="item.image_url"></image>
+        <navigator url="/pkgGood/detail/detail?id=item.goods_id">
+          <image class="img" mode="widthFix" :src="item.image_url"></image>
+        </navigator>
       </swiper-item>
     </swiper>
 
@@ -24,8 +26,9 @@
 
     <!--todo: 菜单区域  -->
     <u-grid :border="false" col="5">
-      <u-grid-item v-for="item in channel" :key="item.id">
+      <u-grid-item v-for="item in channel" :key="item.id" @click="goCate">
         <image class="menuImg" mode="widthFix" :src="item.icon_url"></image>
+
         <text class="menuText">{{ item.name }}</text>
       </u-grid-item>
       <!-- <u-grid-item>
@@ -66,7 +69,7 @@
     <!-- todo: 商品区-->
     <!-- 商品分类 S -->
     <view class="goodContainer" v-for="item in categoryList" :key="item.id">
-      <view class="titleBox">
+      <view class="titleBox" @click="goCate">
         <text>{{ item.name }}</text>
       </view>
       <!-- 商品列表 S-->
@@ -116,7 +119,7 @@ export default {
   methods: {
     // click (name) {
     //   this.$refs.uToast.success(`点击了第${name}个`)
-    // },
+    // },1.
 
     // 2. 获取首页数据
     async getIndexData () {
@@ -138,6 +141,14 @@ export default {
           return index + 1 + '.' + item.content + ' '
         })
         .join('')
+    },
+
+    // 频道菜单-跳转到分类界面
+    //
+    goCate () {
+      uni.switchTab({
+        url: '/pages/cate/cate'
+      })
     }
   }
 }
