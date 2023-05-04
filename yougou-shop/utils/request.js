@@ -32,6 +32,11 @@ uni.$u.http.interceptors.request.use(
     // if(config?.custom?.auth) {
     // 	config.header.token = 'xxx'
     // }
+    const token = uni.getStorageSync('token')
+    if (token) {
+      config.header['x-nideshop-token'] = token
+    }
+
     return config // 一定要return config
   },
   config => {
