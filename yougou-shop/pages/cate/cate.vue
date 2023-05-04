@@ -111,6 +111,8 @@ export default {
   onHide () {
     // 搜索组件关闭了
     this.searchShow = false
+    //
+    uni.removeStorageSync('cateId')
   },
 
   methods: {
@@ -119,15 +121,24 @@ export default {
       let res = await uni.$http.get('/catalog/index')
       console.log('res -----> ', res)
       this.cateList = res.categoryList
-      // 只有当有数据才确定激活分类信息
+      // 只有当有数据才确定激活分类信息 =》（如果有分类，那么默认激活高亮信息第一个）
       if (this.cateList.length) {
-        this.activeCate = this.cateList[0]
-        // 获取商品分类
-        this.getGoodList()
+        //❗⚡ 从本地取出 cateID
+        const cateId = uni.getStorageSync('cateId')
+        if (cateId) {
+          // 是从首页点击了分类项目或分类标题，才跳转过来的
+          let row = this.cateList.find(item => item.id === cateId) //通过id,找到分类的完整信息
+          this.changeActive(row) //类似模拟点击了一下，传入分类信息（复用了重复逻辑，获取列表逻辑）
+        } else {
+          // 直接点击了tarBar分类过来的
+          this.activeCate = this.cateList[0]
+          // 第一次请求 激活分类下的商品信息
+          this.getGoodList()
+        }
       }
     },
 
-    // 获取商品列表的方法
+    // 获取激活分类下的商品列表的方法
     async getGoodList () {
       this.status = 'loading' // 数据加载中...
       // 请求数据

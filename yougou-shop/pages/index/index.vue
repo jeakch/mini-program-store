@@ -26,7 +26,11 @@
 
     <!--todo: 菜单区域  -->
     <u-grid :border="false" col="5">
-      <u-grid-item v-for="item in channel" :key="item.id" @click="goCate">
+      <u-grid-item
+        v-for="item in channel"
+        :key="item.id"
+        @click="goCate(item.id)"
+      >
         <image class="menuImg" mode="widthFix" :src="item.icon_url"></image>
 
         <text class="menuText">{{ item.name }}</text>
@@ -69,7 +73,7 @@
     <!-- todo: 商品区-->
     <!-- 商品分类 S -->
     <view class="goodContainer" v-for="item in categoryList" :key="item.id">
-      <view class="titleBox" @click="goCate">
+      <view class="titleBox" @click="goCate(item.id)">
         <text>{{ item.name }}</text>
       </view>
       <!-- 商品列表 S-->
@@ -145,7 +149,10 @@ export default {
 
     // 频道菜单-跳转到分类界面
     //
-    goCate () {
+    goCate (cateId) {
+      //cateId 就是点击的分类ID, 也就是分类页面 左侧要高亮的信息WWW
+      // 存储在本地
+      uni.setStorageSync('cateId', cateId)
       uni.switchTab({
         url: '/pages/cate/cate'
       })
