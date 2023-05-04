@@ -11,6 +11,7 @@
         <!-- <view class="active">分类1</view> -->
         <view
           v-for="item in cateList"
+          @click="changeActive(item)"
           :class="{ active: activeCate.id === item.id }"
           :key="item.id"
           >{{ item.name }}</view
@@ -150,7 +151,7 @@ export default {
 
     // 滚动加载更多数据
     loadMore () {
-      console.log('滚动加载更多数据')
+      // console.log('滚动加载更多数据')
       //  loadmore 加载更多，表示还可加载
       //  loading  加载中， 不可以继续加载
       //  nomore   没有了，不可以加载
@@ -158,6 +159,19 @@ export default {
       // 页码变化
       this.currentPage++
       // 重新获取请求
+      this.getGoodList()
+    },
+
+    // 修改激活
+    changeActive (obj) {
+      // 重新赋值激活分类
+      this.activeCate = obj
+      // 重置列表相关参数
+      this.count = 0
+      this.list = []
+      this.status = 'loadmore'
+      this.currentPage = 1
+      // 重新获取列表
       this.getGoodList()
     }
   }
