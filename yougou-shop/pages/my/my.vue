@@ -2,7 +2,7 @@
   <view class="container">
     <view class="userinfo">
       <!-- 未登录状态 -->
-      <view class="head-wrap">
+      <view class="head-wrap" v-if="!token">
         <view class="no-login-avatar">
           <view class="no-avatar">
             <image
@@ -10,25 +10,34 @@
               src="../../static/images/default-avatar.png"
             ></image>
           </view>
-          <view class="btn-login">点我登录</view>
+          <view class="btn-login" @click="$store.dispatch('user/wxLoginAction')"
+            >点我登录</view
+          >
+          <!-- ! $store.dispatch('user/wxLoginAction')  解析 -->
+          <!-- todo: 它是一个Vuex Store Action的名称，表示一个名为 wxLoginAction 的 Action，它属于Vuex Store中的 user 模块 -->
+          <!-- todo: 在 Vuex 中，Action 是用来执行异步操作或一系列操作的函数。通过 store.dispatch 方法调用 Action，即可触发这个 Action 执行相应的操作。 -->
+          <!-- 
+            *在上述模板代码中，$store.dispatch('user/wxLoginAction') 表示通过 $store 对象来调用名为 wxLoginAction 的 Vuex Store Action，
+            *该 Action 会向服务器发送请求以进行微信登录。
+           -->
         </view>
       </view>
       <!-- 登录状态 -->
-      <!-- <view class='head-wrap' >
-	            <view class="head-l">
-	                <view class='l'>
-	                    <image class='avatar' src=""></image>
-	                </view>
-	                <view class='r'>
-	                    <view class='t'>
-	                        <view class='name'>昵称</view>
-	                    </view>
-	                </view>
-	            </view>
-	            <view class="head-r">
-	                <view class="arrow"></view>
-	            </view>
-	        </view> -->
+      <view class="head-wrap" v-else>
+        <view class="head-l">
+          <view class="l">
+            <image class="avatar" :src="userInfo.avatar"></image>
+          </view>
+          <view class="r">
+            <view class="t">
+              <view class="name">{{ userInfo.nickname }}</view>
+            </view>
+          </view>
+        </view>
+        <view class="head-r">
+          <view class="arrow"></view>
+        </view>
+      </view>
     </view>
     <view class="order-container">
       <view class="header">
@@ -49,7 +58,7 @@
               src="../../static/images/order/status/wait_pay.png"
             >
             </image>
-            <view class="blue-point">11</view>
+            <view class="blue-point" v-if="token">11</view>
           </view>
           <text class="order-txt">待付款</text>
         </view>
@@ -60,7 +69,7 @@
               src="../../static/images/order/status/wait_receipt.png"
             >
             </image>
-            <view class="blue-point">22</view>
+            <view class="blue-point" v-if="token">22</view>
           </view>
           <text class="order-txt">待发货</text>
         </view>
@@ -71,7 +80,7 @@
               src="../../static/images/order/status/received.png"
             >
             </image>
-            <view class="blue-point">22</view>
+            <view class="blue-point" v-if="token">22</view>
           </view>
           <text class="order-txt">待收货</text>
         </view>

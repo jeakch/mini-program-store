@@ -154,6 +154,7 @@ export default {
       // 存储在本地
       uni.setStorageSync('cateId', cateId)
       uni.switchTab({
+        // ❗ switchTab 只能跳转到tabBar页面；
         url: '/pages/cate/cate'
       })
     }

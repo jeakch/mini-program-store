@@ -1,3 +1,4 @@
+import { mapState } from 'vuex'
 export default {
   namespaced: true,
   state: {
@@ -22,5 +23,51 @@ export default {
       uni.setStorageSync('userInfo', data)
     }
   },
-  actions: {}
+  actions: {
+    // 微信登录
+    wxLoginAction (context) {
+      //todo: 调用 uni.login
+      //* 前端调用 wx.login 方法获取登录code提交给后端
+      uni.login({
+        success: async res => {
+          // console.log('点击登录：res', res.code)
+          // res.code 就是登录凭证，只需要将code提交给服务端即可
+
+          let result = await uni.$http.post('/auth/loginByWeixin', {
+            code: res.code
+          })
+          console.log('result', result)
+
+          // 存储token
+          context.commit('setToken', result.token)
+
+          //* // 获取一下用户的资料 (需要携带token的，但是我们的请求拦截器已经写好了配置)
+          // let result2 = await uni.$http.get('user/profile')
+          // console.log('result2 -----> ', result2)
+
+          // 存储用户资料
+          context.commit('setUserInfo', result2)
+
+          // 提示一下
+          uni.showToast({
+            title: '登陆成功'
+          })
+
+          // 获取用户资料
+          await context.dispatch('getUserInfo')
+        },
+        fail: err => {
+          console.log('err', err)
+        }
+      })
+    },
+    // 获取用户资料
+    async getUserInfo (context) {
+      let res = await uni.$http.get('/user/profile')
+      context.commit('setUserInfo', res)
+    }
+  },
+  computed: {
+    ...mapState('user', ['token', 'userInfo'])
+  }
 }
